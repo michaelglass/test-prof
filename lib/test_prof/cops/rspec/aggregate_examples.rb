@@ -108,7 +108,7 @@ module RuboCop
       #     expect(number).to be_odd
       #   end
       #
-      class AggregateExamples < Cop
+      class AggregateExamples < Base
         include LineRangeHelpers
         include MetadataHelpers
         include NodeMatchers
@@ -124,9 +124,7 @@ module RuboCop
           example_group_with_several_examples(node) do |all_examples|
             example_clusters(all_examples).each do |_, examples|
               examples[1..-1].each do |example|
-                add_offense(example,
-                  location: :expression,
-                  message: message_for(example, examples[0]))
+                add_offense(example, message: message_for(example, examples[0]))
               end
             end
           end
